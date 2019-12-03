@@ -1,13 +1,13 @@
 ---
 # Documentation: https://sourcethemes.com/academic/docs/managing-content/
 
-title: "estimation"
-authors: []
-date: 2019-12-03T06:27:26-08:00
+title: "Learning Pose Estimation for UAV Autonomous Navigation and Landing Using Visual-Inertial Sensor Data"
+authors: [Francesca Baldini, Animashree Anandkumar1, and Richard M. Murray]
+# date: 2019-12-03T06:27:26-08:00
 doi: ""
 
 # Schedule page publish date (NOT publication's date).
-publishDate: 2019-12-03T06:27:26-08:00
+# publishDate: 2019-12-03T06:27:26-08:00
 
 # Publication type.
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
