@@ -26,5 +26,10 @@ subtitle = ""
   name = "C++"
   description = "90%"
 
+[[feature]]
+  icon = "Matlab"
+  icon_pack = "fab"
+  name = "Matlab"
+  description = "90%"
 
 +++
