@@ -14,7 +14,7 @@ subtitle = ""
 # 
 # For available icons, see: https://sourcethemes.com/academic/docs/widgets/#icons
 
-[[feature]]
+<!-- [[feature]]
   icon = "r-project"
   icon_pack = "fab"
   name = "R"
@@ -30,6 +30,6 @@ subtitle = ""
   icon = "camera-retro"
   icon_pack = "fas"
   name = "Photography"
-  description = "10%"
+  description = "10%" -->
 
 +++
