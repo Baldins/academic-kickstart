@@ -5,9 +5,10 @@ headless = true  # This file represents a page section.
 active = true  # Activate this widget? true/false
 weight = 65  # Order that this section will appear.
 
-title = "Projects"
+title = "Learning Pose Estimation for UAV Autonomous Navigation and Landing Using Visual-Inertial Sensor Data"
 subtitle = ""
-
+summary = "In this work, we propose a new learning approach for autonomous navigation and landing of an Unmanned-Aerial-Vehicle (UAV). We develop a multimodal fusion of deep neural architectures for visual-inertial odometry. We train the model in an end-to-end fashion to estimate the current vehicle pose from streams of visual and inertial measurements.
+We first evaluate the accuracy of our estimation by comparing the prediction of the model to traditional algorithms on the publicly available EuRoC MAV dataset. The results illustrate a $25 \%$ improvement in estimation accuracy over the baseline. Finally, we integrate the architecture in the closed-loop flight control system of Airsim - a plugin simulator for Unreal Engine - and we provide simulation results for autonomous navigation and landing."
 [content]
   # Page type to display. E.g. project.
   page_type = "project"
@@ -35,7 +36,7 @@ subtitle = ""
 
 [design]
   # Choose how many columns the section has. Valid values: 1 or 2.
-  columns = "2"
+  columns = "1"
 
   # Toggle between the various page layout types.
   #   1 = List
@@ -54,10 +55,10 @@ subtitle = ""
   #   Any HTML color name or Hex value is valid.
   
   # Background color.
-  # color = "navy"
+  <!-- # color = "navy" -->
   
   # Background gradient.
-  # gradient_start = "DeepSkyBlue"
+  <!-- # gradient_start = "DeepSkyBlue" -->
   # gradient_end = "SkyBlue"
   
   # Background image.
@@ -65,7 +66,7 @@ subtitle = ""
   # image_darken = 0.6  # Darken the image? Range 0-1 where 0 is transparent and 1 is opaque.
 
   # Text color (true=light or false=dark).
-  # text_color_light = true  
+  <!-- # text_color_light = true   -->
   
 [advanced]
  # Custom CSS. 
