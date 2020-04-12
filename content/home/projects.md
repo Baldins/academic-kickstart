@@ -7,8 +7,7 @@ weight = 65  # Order that this section will appear.
 
 title = "Learning Pose Estimation for UAV Autonomous Navigation and Landing Using Visual-Inertial Sensor Data"
 subtitle = ""
-summary = "In this work, we propose a new learning approach for autonomous navigation and landing of an Unmanned-Aerial-Vehicle (UAV). We develop a multimodal fusion of deep neural architectures for visual-inertial odometry. We train the model in an end-to-end fashion to estimate the current vehicle pose from streams of visual and inertial measurements.
-We first evaluate the accuracy of our estimation by comparing the prediction of the model to traditional algorithms on the publicly available EuRoC MAV dataset. The results illustrate a $25 \%$ improvement in estimation accuracy over the baseline. Finally, we integrate the architecture in the closed-loop flight control system of Airsim - a plugin simulator for Unreal Engine - and we provide simulation results for autonomous navigation and landing."
+
 [content]
   # Page type to display. E.g. project.
   page_type = "project"
@@ -59,7 +58,7 @@ We first evaluate the accuracy of our estimation by comparing the prediction of 
   
   # Background gradient.
   <!-- # gradient_start = "DeepSkyBlue" -->
-  # gradient_end = "SkyBlue"
+  <!-- # gradient_end = "SkyBlue" -->
   
   # Background image.
   # image = "background.jpg"  # Name of image in `static/img/`.
