@@ -3,6 +3,7 @@ title: Learning Pose Estimation for UAV Autonomous Navigation and Landing Using 
 summary: A new learning approach for autonomous navigation and landing of an Unmanned-Aerial-Vehicle (UAV). We develop a multimodal fusion of deep neural architectures for visual-inertial odometry, and we train the model in an end-to-end fashion to estimate the current vehicle pose from streams of visual and inertial measurements.
 date: "2018-06-28T00:00:00Z"
 
+
 reading_time: false  # Show estimated reading time?
 share: false  # Show social sharing links?
 profile: false  # Show author profile?
@@ -20,7 +21,7 @@ project: []
 
 Localization is an essential task for robotics applications. To know the exact pose (position and orientation) of the agent it's essential for visualization, navigation, prediction, and planning.\\
 
-Here I cover the whole pipeline to localize a drone using only streams of camera images and IMU data.
+In this project I cover the pipeline used in the paper to localize the pose of the drone using only streams of camera images and IMU data.
 I use Python and Pytorch for this project.
 
 To reproduce the results, please, download EuRoC Mav dataset at https://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets#downloads.
@@ -69,10 +70,6 @@ plt.ion()   # interactive mode
 
 # Import data
 
-
-
-
-
 ```python
 def return_idx(timestamps, data):
     "Return the idx of the timestamp of the camera"
@@ -94,8 +91,6 @@ def return_idx_single(temp, data):
 ```
 
 ### Import csv data from folders
-
-## Create Dataset and Datalader
 
 
 ```python
@@ -168,23 +163,6 @@ new_imu_values = new_imu_values[:1696]
 image_data = pd.merge(camera_data,new_vicon, on='timestamp').reset_index(drop=True)
 image_data.to_csv(r'/home/francesca/euroc12/cam0/imag_data.csv',index = None, header=True)
 ```
-
-
-    ---------------------------------------------------------------------------
-
-    NameError                                 Traceback (most recent call last)
-
-    <ipython-input-1-29560d1e73f5> in <module>
-    ----> 1 imu_data = pd.read_csv('/home/francesca/euroc12/imu0/data.csv')
-          2 camera_data = pd.read_csv('/home/francesca/euroc12/cam0/data.csv')
-          3 vicon_data = pd.read_csv('/home/francesca/euroc12/vicon0/data.csv')
-          4 
-          5 # Drop the first row of the camera
-
-
-    NameError: name 'pd' is not defined
-
-
 
 ```python
 class NewDataset(Dataset):
@@ -272,8 +250,6 @@ validation_loader_1 = torch.utils.data.DataLoader(dataset, batch_size=batch_size
                                                 sampler=valid_sampler)
 ```
 
-## The network Model
-
 
 ```python
 def quaternion_angular_error(q1, q2):
@@ -291,7 +267,7 @@ def quaternion_angular_error(q1, q2):
     theta = 2 * np.arccos(d) * 180 / np.pi
     return theta
 ```
-
+## The Network Model
 
 ```python
 class Flatten(nn.Module):
@@ -398,8 +374,6 @@ class AverageMeter():
         self.avg = self.sum / self.count
 ```
 
-## The Loss Criterion
-
 
 ```python
 # set the device
@@ -424,7 +398,7 @@ feature_extractor = models.resnet18(pretrained=True)
 ```python
 ### Training and Validatin functions
 ```
-
+## The Loss Criterion
 
 ```python
 class NetCriterion(torch.nn.Module):
