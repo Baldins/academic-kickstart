@@ -25,8 +25,8 @@ To estimate the global pose of the aerial vehicle, we develop a deep neural netw
 
 In this project I will cover the pipeline used in our paper to localize the pose of the drone using only streams of camera images and IMU data.
 I use Python and Pytorch for this project.
+For more detail, please, check our paper at https://fbaldini.netlify.com/publication/learning_pose_estimation/learning_pose_estimation.pdf.
 
-To reproduce the results, please, download EuRoC Mav dataset at https://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets#downloads.
 
 # Estimation Problem
 
@@ -76,6 +76,8 @@ where $\hat{s} :=\log \hat{\sigma}^{2}$ is the learnable variable and each varia
 
 
 # A Pytorch Implementation of Our Work 
+
+To reproduce the results, please, download EuRoC Mav dataset at https://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets#downloads.
 
 ```python
 from __future__ import print_function, division
