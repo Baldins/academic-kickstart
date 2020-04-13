@@ -19,12 +19,63 @@ image:
 project: []
 ---
 
-Localization is an essential task for robotics applications. To know the exact pose (position and orientation) of the agent it's essential for visualization, navigation, prediction, and planning.\\
+Localization is an essential task for robotics applications. To know the exact pose (position and orientation) of the agent it's essential for visualization, navigation, prediction, and planning.
 
-In this project I cover the pipeline used in the paper to localize the pose of the drone using only streams of camera images and IMU data.
+To estimate the global pose of the aerial vehicle, we develop a deep neural network architecture for visual-inertial odometry, which provides a robust alternative to traditional techniques for autonomous navigation of Unmanned-Aerial-Vehicles.
+
+In this project I will cover the pipeline used in our paper to localize the pose of the drone using only streams of camera images and IMU data.
 I use Python and Pytorch for this project.
 
 To reproduce the results, please, download EuRoC Mav dataset at https://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets#downloads.
+
+# Estimation Problem
+
+Given the actual state $x_t = [x,y,z,q_{w},q_{x},q_{y},q_{z}]^T \in \mathbf{R}^7$, we train the neural network to estimate the vehicle pose $\hat{x}_t = [\hat{x},\hat{y},\hat{z},\hat{q}_w,\hat{q}_x,\hat{q}_y,\hat{q}_z]^T \in \mathbf{R}^7$ from a continuous stream of images and inertial measurements. The inputs for our model are observation tuples $ y_t =\{ y_{I},y_{V} \} $ of RGB images and IMU data, where $ y_{I} = [\tau,a_x,a_y,a_z,\omega_x,\omega_y,\omega_z]^T \in \mathbf{R}^{N \times7} $, $\tau$ is the timestamp of the inertial measurement, $a$ is the linear acceleration, $\omega$ is the angular velocity, and $N$ is the number of inertial observation between two consecutive camera frames $t$ and $t+1$.
+
+The online localization task aims to estimate the pose of the vehicle $x_t$ at any given time given the current observations $y_t$ and previous pose state $x_{t-1}$. In the learning framework, we aim to model the mapping $f$ between raw data and the current pose as follows: $x_t = f(x_{t-1}, y_{t-1})$, $f:\mathbf{R}^6, \mathbf{R}^{p \times q} \rightarrow \mathbf{R}^{7}$, where $p,q$ are the image dimensions.
+
+# The architecture
+
+![png](./arch.png)
+
+### Image feature extractor
+To encode image features, we use ResNet18, pre-trained on the ImageNet dataset, truncated before the last average pooling layer. Each of the convolutions is followed by batch normalization and the Rectified Linear Unit (ReLU).
+We replace the average pooling with global average pooling and subsequently add two inner-product layers. The output is a visual feature vector representation $z_{V}$.
+
+### Inertial feature extraction
+IMU measurements are generally available at a rate of an order of magnitude higher (e.g., $~100-200 Hz$) than visual data (e.g., $~10-20 Hz$).
+A Long Short-Term Memory (LSTM) processes batches of IMU data (acceleration and angular velocity) between two consecutive image frames and outputs an inertial feature vector $z_I$.
+LSTM exploits the temporal dependencies of the input data by maintaining hidden states throughout the window.
+
+### Intermediate fully-connected layer
+The inertial feature vector $z_I$ is concatenated with the visual feature representation $z_V$ into a single feature $z_t$ representing the motion dynamics of the robot: $z_t = \mathtt{concat}(z_I, z_V)$.
+This vector is then carried over to the core LSTM for sequential modeling.
+
+### Core LSTM
+The core LSTM takes as input the motion feature $z_t$ along with its previous hidden states $h_{t-1}$ and models the dynamics and the connections between sequences of features, where  $h_t= \mathit{f}(z_t,h_{t-1})$.  The use of the LSTM module allows for the rapid deployment of visual-inertial pose tracking.
+These models can maintain the memory of the hidden states over time and have feedback loops among them. In this way, they enable their hidden state to be related to the previous one, allowing them to learn the connection between the last input and pose state in the sequence.
+Finally, the output of the LSTM is carried into a fully-connected layer, which serves as an odometry estimation. The first inner-product layer is of dimension $1024$, and the following two are of dimensions $3$ and $4$ for regressing the translation $x$ and rotation $q$ as quaternions. Overall, the fully connected layer maps the features vector representation $z_t$ into a pose vector as follows:  $x_t = LSTM(z_t, h_{t-1})$.
+
+# The Criterion
+
+We predict the position and orientation of the robot following the work of Kendall et al., with the following modification[kendall2017geometric]. In our loss function, we introduce an additional constraint that penalizes both the $L_1$ and $L_2$ Euclidean norm. Let $x_t= [x,y,z]^T \in \mathbf{R}^3, q_t = [q_w,q_x,q_y,q_z]^T \in \mathbf{R}^4$ be the ground-truth translation and rotation vector, respectively, and $\hat{x}_t, \hat{q}_t$ their estimates. 
+
+Our loss function is as follows: 
+
+$$\mathcal{L}_{\beta}(I)= \mathcal{L}_x(I)+\beta \mathcal{L}_q(I)$$
+
+where $\mathcal{L}_x (I) =\| \hat{x}_t-x_t \| _{L_2} + \gamma \| \hat{x}_t-x_t \| _{L1} $  and $ \mathcal{L}_q (I)= \| \hat{q}_t - \frac{q_t}{\|q_t\|}\| _{L_2} + + \gamma \| \hat{q}_t - \frac{q_t}{\|q_t\|}\| _{L_1} $ represent the translation and the rotation losses. 
+
+$\beta$ is a scale factor that balances the weights of position and orientation, which are expressed in different units, and $\gamma$ is a coefficient introduced to balance the two Euclidean norms. 
+However, $\beta$ requires significant tuning to get consistent results, as shown in [kendall2017geometric]. To avoid this issue, we replace $\beta$ by introducing learnable parameters.
+
+The final loss function is as follows: 
+ $$   \mathcal{L}_{\sigma}(I)=\mathcal{L}_x(I) \exp \left(-\hat{s}_x\right)+\hat{s}_x+\mathcal{L}_q(I) \exp \left(-\hat{s}_q\right)+\hat{s}_q $$
+
+where $\hat{s} :=\log \hat{\sigma}^{2}$ is the learnable variable and each variable acts as a weight for the respective component in the loss function.
+
+
+# A Pytorch Implementation of Our Work 
 
 ```python
 from __future__ import print_function, division
@@ -73,7 +124,6 @@ plt.ion()   # interactive mode
 ```python
 def return_idx(timestamps, data):
     "Return the idx of the timestamp of the camera"
-    
     idx_sensor = []
     for temp in timestamps:
         idx=int(data[data['timestamp']==temp].index[0])
@@ -83,18 +133,18 @@ def return_idx(timestamps, data):
 
 def return_idx_single(temp, data):
     "Return the idx of the timestamp of the camera"
-    
     idx_sensor = []
     idx = data[data['timestamp']==temp].index[0]
-
     return idx
 ```
 
-### Import csv data from folders
-
+#### Import csv data from folders
 
 ```python
-imu_data = pd.read_csv('/home/francesca/euroc12/imu0/dadata = pd.read_csv('/home/francesca/euroc12/cam0/daata = pd.read_csv('/home/francesca/euroc12/vicon0/op the first row of the camera
+imu_data = pd.read_csv('/home/francesca/euroc12/imu0/')
+camera_data = pd.read_csv('home/francesca/euroc12/cam0/')
+vicon_data = pd.read_csv('/home/francesca/euroc12/vicon0/')
+#drop the first row of the camera
 camera_data=camera_data.drop(cmera_data.index[[0]])
 
 # re-assign name to columns
@@ -106,8 +156,8 @@ imu_data.columns =['timestamp','wx','wy','wz','ax','ay','az']
 camera_timestamps = camera_data['timestamp']
 camera_timestamps = camera_timestamps.reset_index(drop=True)
 
-### Interpolate Vicon data to get data at the same timestamp of the camera and IMU
-# Vicon data
+# Interpolate Vicon data to get data at the same timestamp of the camera and IMU
+
 vicondata = vicon_data.copy() #create a copy
 
 for i in range(len(camera_timestamps)):
@@ -163,6 +213,8 @@ new_imu_values = new_imu_values[:1696]
 image_data = pd.merge(camera_data,new_vicon, on='timestamp').reset_index(drop=True)
 image_data.to_csv(r'/home/francesca/euroc12/cam0/imag_data.csv',index = None, header=True)
 ```
+# Crreate a new dataset
+
 
 ```python
 class NewDataset(Dataset):
@@ -223,6 +275,7 @@ dataloader = DataLoader(dataset, batch_size=32,
                         shuffle=False, num_workers=15)
 ```
 
+# Let's train
 
 ```python
 batch_size = 32
@@ -394,10 +447,6 @@ model = model.to(device)
 feature_extractor = models.resnet18(pretrained=True)
 ```
 
-
-```python
-### Training and Validatin functions
-```
 ## The Loss Criterion
 
 ```python
@@ -430,7 +479,7 @@ class NetCriterion(torch.nn.Module):
         return loss
 ```
 
-## Train the network
+## Training and Validation functions
 
 
 ```python
@@ -542,11 +591,9 @@ def validate(val_loader, model, criterion, epoch, log_freq=1, print_sum=True):
 
 ```
 
-## Let's plot the results! 
-
+To regress the pose of the vehicle, we compute the Euclidean loss between the estimated pose and the ground truth. We adopt Adam optimizer to minimize this loss function, starting with an initial rate of  $10^{-4}$
 
 ```python
-imu = next(iter(train_loader))[1]
 # Create model
 model = IMUNet(feature_extractor, num_features=num_features, pretrained=True)
 model = model.to(device)
@@ -588,9 +635,8 @@ print('n_epochs = {}'.format(n_epochs))
 
 ```
 
-
-
-
+# Let's plot the results! 
+#### Calculate translation and rotation errors of the predicted poses on train and validation datasets
 
 ```python
 def model_results_pred_gt(model, dataloader):
@@ -667,7 +713,7 @@ pred_poses_val = pred_poses
 gt_poses_val = gt_poses
 ```
 
-    
+'''python    
     === Test Validation Dataset ======
     gt_poses = (320, 7)
     pred_poses = (320, 7)
@@ -675,7 +721,7 @@ gt_poses_val = gt_poses
     T: median = 0.057, mean = 0.078
     R: median = 3.240, mean = 4.024
 
-
+'''
 
 ```python
 from mpl_toolkits.mplot3d import Axes3D
