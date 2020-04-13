@@ -15,4 +15,6 @@ header:
   image: "arch4.png"
 ---
 
-Add your *content* here...
+Localization is an essential task for robotics applications. To know the exact pose (position and orientation) of the agent it's essential for visualization, navigation, prediction, and planning.\\
+
+In the following I will show the whole pipeline to localize a drone which is based only on camera images and IMU data.
