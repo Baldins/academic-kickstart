@@ -52,7 +52,9 @@ $ y_t $
 and previous pose state 
 $ x_{t-1} $. 
 
-In the learning framework, we aim to model the mapping $ f $ between raw data and the current pose as follows: $ x_t = f(x_{t-1}, y_{t-1}) $, 
+In the learning framework, we aim to model the mapping $ f $ between raw data and the current pose as follows: 
+
+$ x_t = f(x_{t-1}, y_{t-1}) $, 
 
 
 $ f:\mathbf{R}^6, \mathbf{R}^{p \times q} \rightarrow \mathbf{R}^{7} $, 
