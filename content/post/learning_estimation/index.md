@@ -76,11 +76,14 @@ A Long Short-Term Memory (LSTM) processes batches of IMU data (acceleration and 
 LSTM exploits the temporal dependencies of the input data by maintaining hidden states throughout the window.
 
 ### Intermediate fully-connected layer
-The inertial feature vector $z_I$ is concatenated with the visual feature representation $ z_V $ into a single feature $ z_t $ representing the motion dynamics of the robot: $ z_t = \mathtt{concat}(z_I, z_V) $.
+The inertial feature vector $z_I$ is concatenated with the visual feature representation $ z_V $ into a single feature $ z_t $ representing the motion dynamics of the robot: 
+
+$ z_t = \mathtt{concat}( z_I, z_V) $.
+
 This vector is then carried over to the core LSTM for sequential modeling.
 
 ### Core LSTM
-The core LSTM takes as input the motion feature 
+The core LSTM takes as input the motion feature $z_t$ 
 
 $ z_t $ 
 
@@ -90,7 +93,7 @@ $ h_{t-1} $
 
 and models the dynamics and the connections between sequences of features, where 
 
-$ h_t= \mathit{f} (z_t,h_{t-1}) $.
+$ h_t= \mathit{f} ( z_t , h_{t-1} ) $.
 
 The use of the LSTM module allows for the rapid deployment of visual-inertial pose tracking. These models can maintain the memory of the hidden states over time and have feedback loops among them. In this way, they enable their hidden state to be related to the previous one, allowing them to learn the connection between the last input and pose state in the sequence.
 
