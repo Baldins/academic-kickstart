@@ -19,20 +19,37 @@ subtitle = ""
   icon = "python"
   icon_pack = "fab"
   name = "python"
-  description = "90%"
+  # description = "90%"
 
 [[feature]]
-  icon = "C++"
+  icon = "cogs"
+  icon_pack = "fas"
+  name = "Machine Learning"
+  # description = "90%"
+
+[[feature]]
+icon = "github"
+icon_pack = "fab"
+name = "GitHub"
+# description = "90%"
+
+[[feature]]
+  icon = "robot"
+  icon_pack = "fab"
+  name = "Robotics"
+  # description = "90%"
+
+[[feature]]
+  icon = "cplusplus"
   icon_pack = "fab"
   name = "C++"
-  description = "80%"
+  # description = "80%"
 
 [[feature]]
-  icon = "Matlab"
+  icon = "matlab"
   icon_pack = "fab"
   name = "Matlab"
-  description = "90%"
-
+  # description = "90%"
 
 # Background image.
 image = "postback.png"  
