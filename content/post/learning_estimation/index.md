@@ -16,7 +16,13 @@ image:
   caption: "Learning Estimator"
   image: "arch4.png"
 
-# project: []
+url_project: project/learningestimation
+url_code: notebooks/learningestimationnotebook
+url_pdf: publication/learning_pose_estimation
+url_dataset: https://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets
+
+
+project: []
 ---
 
 Localization is an essential task for robotics applications. To know the exact pose (position and orientation) of the agent it's essential for visualization, navigation, prediction, and planning.
@@ -24,10 +30,8 @@ Localization is an essential task for robotics applications. To know the exact p
 We propose a new end-to-end approach for online pose estimation that leverages multimodal fusion learning. This consists of a convolutional neural network for image regression and two long short-term memories (LSTMs) of different sizes to account for both sequential and temporal relationships of the input data streams.
 A small LSTM architecture integrates arrays of acceleration and angular velocity from the inertial measurements unit sensor. A bigger core LSTM processes visual and inertial feature representations along with the previous vehicle's pose and returns position and orientation estimates at any given time.
 
-
 In this project I will cover the pipeline used in our paper to localize the pose of the drone using only streams of camera images and IMU data.
 I use Python and Pytorch for this project.
-For more detail, please, check our paper at https://fbaldini.netlify.com/publication/learning_pose_estimation/learning_pose_estimation.pdf.
 
 
 # Estimation Problem
@@ -50,11 +54,11 @@ A Long Short-Term Memory (LSTM) processes batches of IMU data (acceleration and 
 LSTM exploits the temporal dependencies of the input data by maintaining hidden states throughout the window.
 
 ### Intermediate fully-connected layer
-The inertial feature vector $z_I$ is concatenated with the visual feature representation $z_V$ into a single feature $z_t$ representing the motion dynamics of the robot: $z_t = \mathtt{concat}(z_I, z_V)$.
+The inertial feature vector $z_I$ is concatenated with the visual feature representation $ z_V $ into a single feature $ z_t $ representing the motion dynamics of the robot: $ z_t = \mathtt{concat}(z_I, z_V) $.
 This vector is then carried over to the core LSTM for sequential modeling.
 
 ### Core LSTM
-The core LSTM takes as input the motion feature $z_t$ along with its previous hidden states $h_{t-1}$ and models the dynamics and the connections between sequences of features, where  $h_t= \mathit{f}(z_t,h_{t-1})$.  The use of the LSTM module allows for the rapid deployment of visual-inertial pose tracking.
+The core LSTM takes as input the motion feature $z_t$ along with its previous hidden states $ h_{t-1} $ and models the dynamics and the connections between sequences of features, where  $ h_t= \mathit{f}(z_t,h_{t-1}) $.  The use of the LSTM module allows for the rapid deployment of visual-inertial pose tracking.
 These models can maintain the memory of the hidden states over time and have feedback loops among them. In this way, they enable their hidden state to be related to the previous one, allowing them to learn the connection between the last input and pose state in the sequence.
 Finally, the output of the LSTM is carried into a fully-connected layer, which serves as an odometry estimation. The first inner-product layer is of dimension $1024$, and the following two are of dimensions $3$ and $4$ for regressing the translation $x$ and rotation $q$ as quaternions. Overall, the fully connected layer maps the features vector representation $z_t$ into a pose vector as follows:  $x_t = LSTM(z_t, h_{t-1})$.
 

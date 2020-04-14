@@ -16,7 +16,11 @@ image:
   caption: "Learning Estimator"
   image: "arch4.png"
 
-project: []
+url_pdf: publication/learning_pose_estimation
+url_code: notebooks/learningestimationnotebook
+url_post: post/learning_estimation
+url_dataset: https://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets
+
 ---
 # Abstract
 

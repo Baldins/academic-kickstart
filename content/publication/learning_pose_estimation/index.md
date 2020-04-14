@@ -2,7 +2,7 @@
 # Documentation: https://sourcethemes.com/academic/docs/managing-content/
 
 title: "Learning Pose Estimation for UAV Autonomous Navigation and Landing Using Visual-Inertial Sensor Data"
-authors: [Francesca Baldini, Animashree Anandkumar1, and Richard M. Murray]
+authors: [Francesca Baldini, Animashree Anandkumar, and Richard M. Murray]
 # date: 2019-12-03T06:27:26-08:00
 doi: ""
 
@@ -13,13 +13,13 @@ doi: ""
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
 # 3 = Preprint / Working Paper; 4 = Report; 5 = Book; 6 = Book section;
 # 7 = Thesis; 8 = Patent
-publication_types: ["0"]
+publication_types: ["1"]
 
 # Publication name and optional abbreviated publication name.
 publication: "Learning Pose Estimation for UAV Autonomous Navigation and Landing Using Visual-Inertial Sensor Data"
 publication_short: ""
 
-abstract: " In this work, we propose a robust network- in-the-loop control system that allows an Unmanned- Aerial-Vehicles to navigate and land autonomously on a desired target. To estimate the global pose of the aerial vehicle, we develop a deep neural network ar- chitecture for visual-inertial odometry, which provides a robust alternative to traditional techniques for au- tonomous navigation of Unmanned-Aerial-Vehicles. We first provide experimental results on the accuracy of the estimation by comparing the prediction of our model to traditional visual-inertial approaches on the publicly available EuRoC MAV dataset. The results indicate a clear improvement in the accuracy of the pose estima- tion up to 25% against the baseline. Second, we use Airsim, a simulator available as a plugin for Unreal Engine, to create new datasets of photorealistic images and inertial measurement to train and test our model. We finally integrate the proposed architecture for global localization with the Airsim closed-loop control system, and we provide simulation results for the autonomous landing of the aerial vehicle."
+abstract: " In this work, we propose a new learning approach for autonomous navigation and landing of an Unmanned-Aerial-Vehicle (UAV). We develop a multi- modal fusion of deep neural architectures for visual- inertial odometry. We train the model in an end-to- end fashion to estimate the current vehicle pose from streams of visual and inertial measurements. We first evaluate the accuracy of our estimation by comparing the prediction of the model to traditional algorithms on the publicly available EuRoC MAV dataset. The results illustrate a 25% improvement in estimation accuracy over the baseline. Finally, we integrate the architecture in the closed-loop flight control system of Airsim - a plugin simulator for Unreal Engine - and we provide simulation results for autonomous navigation and land- ing."
 
 # Summary. An optional shortened abstract.
 summary: ""

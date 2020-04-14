@@ -19,7 +19,7 @@ image:
   caption: "Learning Estimator"
   image: "arch4.png"
 
-project: []
+post: []
 ---
 
 Localization is an essential task for robotics applications. To know the exact pose (position and orientation) of the agent it's essential for visualization, navigation, prediction, and planning.
