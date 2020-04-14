@@ -4,8 +4,7 @@ summary: A new learning approach for autonomous navigation and landing of an Unm
 date: "2018-06-28T00:00:00Z"
 external_link: https://fbaldini.netlify.com/publication/learning_pose_estimation/learning_pose_estimation.pdf
 
-url: post/learning_estimation
-url: project/learningestimation
+
 
 reading_time: false  # Show estimated reading time?
 share: true  # Show social sharing links?
@@ -18,6 +17,12 @@ math: true
 image: 
   caption: "Learning Estimator"
   image: "arch4.png"
+
+url_project: project/learningestimation
+url_code: notebooks/learningestimationnotebook
+url_pdf: publication/learning_pose_estimation
+url_dataset: https://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets
+
 
 post: []
 ---
