@@ -8,6 +8,7 @@ weight = 30  # Order that this section will appear.
 title = "Skills"
 subtitle = ""
 
+
 # Showcase personal skills or business features.
 # 
 # Add/remove as many `[[feature]]` blocks below as you like.
@@ -24,12 +25,17 @@ subtitle = ""
   icon = "C++"
   icon_pack = "fab"
   name = "C++"
-  description = "90%"
+  description = "80%"
 
 [[feature]]
   icon = "Matlab"
   icon_pack = "fab"
   name = "Matlab"
   description = "90%"
+
+
+# Background image.
+image = "postback.png"  
+image_darken = 0.6  
 
 +++
