@@ -83,8 +83,10 @@ $ z_t = \mathtt{concat}( z_I, z_V) $.
 This vector is then carried over to the core LSTM for sequential modeling.
 
 ### Core LSTM
-The core LSTM takes as input the motion feature $z_t$
-along with its previous hidden states $h_{t-1}$
+The core LSTM takes as input the motion feature 
+$z_t$
+along with its previous hidden states 
+$h_{t-1}$
 
 and models the dynamics and the connections between sequences of features, where $ h_t = f(z_t, h_{t-1})$
 
