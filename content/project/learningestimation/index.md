@@ -50,5 +50,5 @@ We integrate our data-driven odometry module in a closed-loop flight control sys
 
 # AirSim Demo
 
-![png](./airsimintegration.png)
-![png](./airsim.png)
+![png](./arsimintegration.png)
+![png](./aisim.png)
