@@ -37,8 +37,7 @@ We propose a new end-to-end approach for online pose estimation that leverages m
  
  The core LSTM uses the feature vector  $ z_t $
 along with the previous estimate 
-$ x_{t-1} $ 
-and makes a prediction about the robot pose (translation and rotation).
+$ x_{t-1} $  and makes a prediction about the robot pose (translation and rotation).
 
 # The Algorithm
 
