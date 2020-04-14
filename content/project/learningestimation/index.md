@@ -52,7 +52,7 @@ The inertial feature vector $ z_I $ is concatenated with the visual feature repr
 This vector is then carried over to the core LSTM for sequential modeling.
 
 ### Core LSTM
-The core LSTM takes as input the motion feature $z_t$ along with its previous hidden states $ h_{t-1} $ and models the dynamics and the connections between sequences of features, where  $ h_t= \mathit{f} (z_t,h_{t-1}) $.  The use of the LSTM module allows for the rapid deployment of visual-inertial pose tracking.
+The core LSTM takes as input the motion feature $ z_t $ along with its previous hidden states $ h_{t-1} $ and models the dynamics and the connections between sequences of features, where  $ h_t= \mathit{f} (z_t,h_{t-1}) $.  The use of the LSTM module allows for the rapid deployment of visual-inertial pose tracking.
 These models can maintain the memory of the hidden states over time and have feedback loops among them. In this way, they enable their hidden state to be related to the previous one, allowing them to learn the connection between the last input and pose state in the sequence.
 Finally, the output of the LSTM is carried into a fully-connected layer, which serves as an odometry estimation. The first inner-product layer is of dimension $ 1024 $, and the following two are of dimensions $ 3 $ and $ 4 $ for regressing the translation $x$ and rotation $q$ as quaternions. Overall, the fully connected layer maps the features vector representation $ z_t $ into a pose vector as follows:  $ x_t = LSTM(z_t, h_{t-1}) $.
 
