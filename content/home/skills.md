@@ -11,6 +11,11 @@ subtitle = ""
 
 # Showcase personal skills or business features.
 # 
+
+# Background image.
+image = "postback.png"  
+image_darken = 0.6  
+
 # Add/remove as many `[[feature]]` blocks below as you like.
 # 
 # For available icons, see: https://sourcethemes.com/academic/docs/widgets/#icons
@@ -50,9 +55,5 @@ name = "GitHub"
   icon_pack = "fab"
   name = "Matlab"
   # description = "90%"
-
-# Background image.
-image = "postback.png"  
-image_darken = 0.6  
 
 +++
