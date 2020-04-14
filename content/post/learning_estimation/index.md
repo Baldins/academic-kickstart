@@ -36,14 +36,9 @@ I use Python and Pytorch for this project.
 
 # Estimation Problem
 
-Given the actual pose state 
-
-$ x_t = [x,y,z,q_w,q_x,q_y,q_z]^T \in \mathbf{R}^7 $
-
- we train the neural network to estimate the vehicle pose 
-
+Given the actual pose state $ x_t = [x,y,z,q_w,q_x,q_y,q_z]^T \in \mathbf{R}^7 $
+we train the neural network to estimate the vehicle pose 
 $\hat{x}_t =[\hat{x},\hat{y},\hat{z},\hat{q}_w,\hat{q}_x,\hat{q}_y,\hat{q}_z]^T \in \mathbf{R}^7 $ 
-
 from a continuous stream of images and inertial measurements.
 
  The inputs for our model are observation tuples $ y_t =\{ y_{I},y_{V} \} $ of RGB images and IMU data, where $ y_{I} = [\tau,a_x,a_y,a_z,\omega_x,\omega_y,\omega_z]^T \in \mathbf{R}^{N \times7} $, $ \tau $ is the timestamp of the inertial measurement, $ a $ is the linear acceleration, $ \omega $ is the angular velocity, and $ N $ is the number of inertial observation between two consecutive camera frames $ t $ and $ t+1 $.
