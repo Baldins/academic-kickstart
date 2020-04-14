@@ -80,7 +80,7 @@ The inertial feature vector $z_I$ is concatenated with the visual feature repres
 This vector is then carried over to the core LSTM for sequential modeling.
 
 ### Core LSTM
-The core LSTM takes as input the motion feature $z_t$ along with its previous hidden states $ h_{t-1} $ and models the dynamics and the connections between sequences of features, where 
+The core LSTM takes as input the motion feature $ z_t $ along with its previous hidden states $ h_{t-1} $ and models the dynamics and the connections between sequences of features, where 
 
 $ h_t= \mathit{f}(z_t,h_{t-1}) $.
 
