@@ -40,3 +40,10 @@ We propose a new end-to-end approach for online pose estimation that leverages m
 We integrate our data-driven odometry module in a closed-loop flight control system, providing a new method for real-time autonomous navigation and landing. To this end, we generate a simulated \textit{Downtown} environment using Airsim, a flight simulator available as a plugin for Unreal Engine [airsim2017fsr]. We collect images and inertial measurements flying in the simulated environment and we train the model on the new synthetic dataset. The network outputs are now the input to the flight control system that generates velocity commands for the UAV system. We  show through real-time simulations that our closed-loop data-driven control system can successfully navigate and land the UAV on the designed target with less than $10$ cm of error.
 
 ![png](./controlsys.png)
+
+# Benchmarking
+
+ We assess the performance of our model and compare it to a baseline algorithms for visual inertia odometry on the publicly available EuRoC MAV dataset. The results show that our method significantly outperforms the state-of-the-art for odometry estimation, improving the accuracy up to $ 25 \% $ over the baseline.
+
+![png](./comp.png)
+![png](./table.png)
