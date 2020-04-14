@@ -30,10 +30,6 @@ Localization is an essential task for robotics applications. To know the exact p
 We propose a new end-to-end approach for online pose estimation that leverages multimodal fusion learning. This consists of a convolutional neural network for image regression and two long short-term memories (LSTMs) of different sizes to account for both sequential and temporal relationships of the input data streams.
 A small LSTM architecture integrates arrays of acceleration and angular velocity from the inertial measurements unit sensor. A bigger core LSTM processes visual and inertial feature representations along with the previous vehicle's pose and returns position and orientation estimates at any given time.
 
-In this project I will cover the pipeline used in our paper to localize the pose of the drone using only streams of camera images and IMU data.
-I use Python and Pytorch for this project.
-
-
 # Estimation Problem
 
 Given the actual pose state $ x_t = [x,y,z,q_w,q_x,q_y,q_z]^T \in \mathbf{R}^7 $
