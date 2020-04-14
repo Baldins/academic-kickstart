@@ -5,7 +5,7 @@ headless = true  # This file represents a page section.
 active = true  # Activate this widget? true/false
 weight = 65  # Order that this section will appear.
 
-title = "Learning Pose Estimation for UAV Autonomous Navigation and Landing Using Visual-Inertial Sensor Data"
+title = "Projects"
 subtitle = ""
 
 [content]
@@ -57,15 +57,15 @@ subtitle = ""
   color = "navy"
   
   # Background gradient.
-  gradient_start = "DeepSkyBlue" 
-  gradient_end = "SkyBlue" 
+   gradient_start = "DeepSkyBlue" 
+   gradient_end = "SkyBlue" 
   
   # Background image.
-  # image = "background.jpg"  # Name of image in `static/img/`.
+  image = "back.png"  # Name of image in `static/img/`.
   # image_darken = 0.6  # Darken the image? Range 0-1 where 0 is transparent and 1 is opaque.
 
   # Text color (true=light or false=dark).
-  text_color_light = true
+  text_color_light = false
   
 [advanced]
  # Custom CSS. 

@@ -21,7 +21,9 @@ project: []
 
 Localization is an essential task for robotics applications. To know the exact pose (position and orientation) of the agent it's essential for visualization, navigation, prediction, and planning.
 
-To estimate the global pose of the aerial vehicle, we develop a deep neural network architecture for visual-inertial odometry, which provides a robust alternative to traditional techniques for autonomous navigation of Unmanned-Aerial-Vehicles.
+We propose a new end-to-end approach for online pose estimation that leverages multimodal fusion learning. This consists of a convolutional neural network for image regression and two long short-term memories (LSTMs) of different sizes to account for both sequential and temporal relationships of the input data streams.
+A small LSTM architecture integrates arrays of acceleration and angular velocity from the inertial measurements unit sensor. A bigger core LSTM processes visual and inertial feature representations along with the previous vehicle's pose and returns position and orientation estimates at any given time.
+
 
 In this project I will cover the pipeline used in our paper to localize the pose of the drone using only streams of camera images and IMU data.
 I use Python and Pytorch for this project.
