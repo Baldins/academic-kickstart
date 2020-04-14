@@ -29,7 +29,7 @@ We propose a new end-to-end approach for online pose estimation that leverages m
 
 ![png](./arch.png)
 
-Architecture for the data-driven VIO module. It consists of visual and inertial encoders, feature concatenations, temporal modeling, and pose regression. The CNN module determines the most discriminative visual features $ z_V $. A small LSTM module transforms windows batch of inertial measurements collected between two consecutive frames into a single inertial feature vector $ z_I $. The visual and inertial feature vectors are then concatenated in a single representation $ z_t $. The core LSTM uses the feature vector $ z_t $ along with the previous estimate $ x_{t-1} $ and makes a prediction about the robot pose (translation and rotation).
+ The CNN module determines the most discriminative visual features $ z_V $. A small LSTM module transforms windows batch of inertial measurements collected between two consecutive frames into a single inertial feature vector $ z_I $. The visual and inertial feature vectors are then concatenated in a single representation $ z_t $. The core LSTM uses the feature vector $ z_t $ along with the previous estimate $ x_{t-1} $ and makes a prediction about the robot pose (translation and rotation).
 
 # The Algorithm
 
