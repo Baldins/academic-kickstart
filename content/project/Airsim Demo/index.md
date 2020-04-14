@@ -1,6 +1,6 @@
 ---
-title: AirSim Demo [UNDER CONSTRUCTION]
-summary:  Integration of our neural estimator in the closed-loop flight control system of Airsim 
+title: AirSim Demo 
+summary: UNDER CONSTRUCTION - Integration of our neural estimator in the closed-loop flight control system of Airsim 
 date: "2018-06-28T00:00:00Z"
 
 
