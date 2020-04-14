@@ -47,7 +47,8 @@ of RGB images and IMU data, where
 $ y_I = [\tau,a_x,a_y,a_z,\omega_x,\omega_y,\omega_z]^T \in \mathbf{R}^{N \times7} $,
 $ \tau $ is the timestamp of the inertial measurement, $ a $ is the linear acceleration, $ \omega $ is the angular velocity, and $ N $ is the number of inertial observation between two consecutive camera frames $ t $ and $ t+1 $.
 
-The online localization task aims to estimate the pose of the vehicle $ x_t $ at any given time given the current observations $ y_t $ 
+The online localization task aims to estimate the pose of the vehicle $ x_t $ at any given time given the current observations
+$ y_t $ 
 and previous pose state $ x_{t-1} $. In the learning framework, we aim to model the mapping $f$ between raw data and the current pose as follows: $ x_t = f(x_{t-1}, y_{t-1}) $, $ f:\mathbf{R}^6, \mathbf{R}^{p \times q} \rightarrow \mathbf{R}^{7} $, where $ p,q $ are the image dimensions.
 
 # The architecture
